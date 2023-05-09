@@ -1,11 +1,28 @@
 //DOM elements
 const form = document.getElementById('city');
 const input = document.getElementById('cityInput');
-const message = document.querySelector('.form-message');
+const button= document.getElementById('btn');
+const msg = document.querySelector('.form-message');
 const cityName = document.getElementById('city-name');
 const todayCard = document.getElementById('today-card');
 const hourlyCard = document.getElementById('hourly-card');
 const forecastCard = document.getElementById('forecast-card');
+
+
+form.addEventListener('submit', e => {
+    //prevent default form submission
+    e.preventDefault();
+    
+    //hide any message that might be displayed
+    msg.textContent = '';
+    msg.classList.remove('visible');
+    
+    //get the search value
+    let inputVal = input.value;
+    console.log(inputVal);
+    return inputVal;
+    });
+
 
 //Async function working with Geolocation
 const success = async ({ coords }) => {
@@ -14,6 +31,7 @@ const success = async ({ coords }) => {
 
     //talk to the weather api
     const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+
     console.log(data);
     console.log(data.city.name);
 
@@ -85,6 +103,3 @@ const config = {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, config);
-
-
-
