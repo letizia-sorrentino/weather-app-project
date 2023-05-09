@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/index.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>My Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      
+      <header>
+        <div class="topnav">
+          <h1>MY WEATHER APP</h1>
+        </div>
+
+        <!-- Find my location-->
+        <div class="search-location">
+          <h2>Add Location:</h2>
+          <form id="city" name="city">
+            <label class="sr-only" for="cityInput">Find my city:</label>
+            <input
+              id="cityInput"
+              name="cityInput"
+              class="city_input"
+              type="search"
+              autofocus
+              placeholder="Enter your city"
+              required
+            />
+            <button type="submit" id="btn" class="btn">
+              <svg
+                fill="#000"
+                width="1rem"
+                height="1rem"
+                focusable="false"
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  d="M19.2 23.2c-1.9 1.1-4 1.6-6.2 1.6C6.2 24.8.9 19.5.9 12.7.9 5.7 6.1.5 13 .5c7 0 12.2 5.2 12.2 12.1 0 2.6-.8 5.1-2.3 7.1l8.4 8.4-3.6 3.6-8.5-8.5zM13 4c-4.8 0-8.5 3.7-8.5 8.6s3.7 8.6 8.5 8.6 8.5-3.7 8.5-8.6S17.8 4 13 4z"
+                ></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </header>
+      <main>
+        <div>
+          <h2>Today</h2>
+          <div id="today-card"></div>
+        </div>
+
+        <div>
+          <h2>Hourly Forecast</h2>
+          <div id="hourly-card"></div>
+        </div>
+
+        <div>
+          <h2>5-Day Forecast</h2>
+          <div id="forecast-card"></div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <p>App made by Letizia S.</p>
+    </footer>
+  </body>
+</html>
