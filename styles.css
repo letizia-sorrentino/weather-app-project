@@ -34,18 +34,17 @@ h1 {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
-    border-bottom: rgba(20,158,220,255) solid 0.25rem;
+    background-color: rgba(20,158,220,255);
 }
 
 input {
     border: none;
-    background-color: rgb(233, 236, 241);
+    background-color: rgb(233, 236, 241); 
     height: 1.5rem;
 }
 
 label {
-    font-weight: 800;
+    color:rgb(255, 255, 255)    
 }
 
 button {
@@ -53,10 +52,16 @@ button {
     border: none;
 }
 
+main {
+    background-color: rgba(20,158,220,255);
+
+}
+
 h2 {
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
+    color:rgb(255, 255, 255);
 }
 
 /* Today's Weather  */

@@ -7,13 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="/index.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="/resources/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/resources/favicon.png" />
 
     <title>My Weather App</title>
   </head>
   <body>
     <div class="container">
-      
       <header>
         <div class="topnav">
           <h1>MY WEATHER APP</h1>
@@ -23,36 +22,39 @@
         <div class="search-location">
           <h2>Add Location:</h2>
           <form id="city" name="city">
-            <label class="sr-only" for="cityInput">Find my city:</label>
+            <label class="sr-only" for="cityInput">Find my city</label>
             <input
               id="cityInput"
               name="cityInput"
               class="city_input"
               type="search"
               autofocus
-              placeholder="Enter your city"
+              placeholder="e.g. London"
               required
             />
+
             <button type="submit" id="btn" class="btn">
               <svg
-                fill="#000"
-                width="1rem"
-                height="1rem"
+                fill="#fff"
+                width="1.5rem"
+                height="1.5rem"
                 focusable="false"
                 aria-hidden="true"
                 viewBox="0 0 32 32"
               >
                 <path
-                  d="M19.2 23.2c-1.9 1.1-4 1.6-6.2 1.6C6.2 24.8.9 19.5.9 12.7.9 5.7 6.1.5 13 .5c7 0 12.2 5.2 12.2 12.1 0 2.6-.8 5.1-2.3 7.1l8.4 8.4-3.6 3.6-8.5-8.5zM13 4c-4.8 0-8.5 3.7-8.5 8.6s3.7 8.6 8.5 8.6 8.5-3.7 8.5-8.6S17.8 4 13 4z"
+                  d="M16 31c8.5 0 15-6.5 15-15S24.5 1 16 1 1 7.5 1 16s6.5 15 15 15zm0-2.8C9.1 28.2 3.9 22.9 3.9 16S9.1 3.8 16 3.8c6.9 0 12.1 5.3 12.1 12.2S22.9 28.2 16 28.2zm-1.3.3h2.7l-.2-7.4h-2.3l-.2 7.4zM3.5 17.4l7.4-.2v-2.3l-7.4-.2v2.7zm11.4-6.6h2.3l.2-7.4h-2.7l.2 7.4zm13.7 6.6v-2.7l-7.4.2v2.3l7.4.2z"
                 ></path>
               </svg>
             </button>
+
+            <p class="form-message"></p>
           </form>
         </div>
       </header>
       <main>
+        <div id="city-name"></div>
         <div>
-          <h2>Today</h2>
           <div id="today-card"></div>
         </div>
 

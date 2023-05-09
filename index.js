@@ -1,29 +1,35 @@
-//const form = document.querySelector('')
+//DOM elements
+const form = document.getElementById('city');
+const input = document.getElementById('cityInput');
+const message = document.querySelector('.form-message');
+const cityName = document.getElementById('city-name');
 const todayCard = document.getElementById('today-card');
 const hourlyCard = document.getElementById('hourly-card');
 const forecastCard = document.getElementById('forecast-card');
 
+//Async function working with Geolocation
 const success = async ({ coords }) => {
     const { latitude, longitude } = coords;
-    //console.log(latitude, longitude, coords);
-   
+    console.log(latitude, longitude, coords);
+
     //talk to the weather api
     const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
-    //console.log(data);
-    setWeather(data.list);
+    console.log(data);
+    console.log(data.city.name);
+
+   //getLocation(data);
+    setWeather(data, data.list);
 }
 
-const setWeather = (list) => {
-    //Destructure the response to get the { data } part of the response
-    const todayData = list.slice(0,1);
-    
+const setWeather = (data, list) => {
+    //Show City Name 
+        const city = data.city.name;
+        const location = `<div class="location"><h2>${city}</h2></div> ` 
+
     //today-weather card
+    const todayData = list.slice(0,1);
     const todayWeather = todayData.map(element => {
-        return `<div class="today-weather">  
-            <h3 class="location">
-            <span class="city-name"></span> 
-            <span class="country"> </span>
-            </h3>        
+        return `<div class="today-weather"> 
             <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp- 273.15)}&#8451</p>
             <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
@@ -61,6 +67,7 @@ const setWeather = (list) => {
         </div > `
     });
 
+    cityName.innerHTML = location;
     todayCard.innerHTML = todayWeather.join("");
     hourlyCard.innerHTML = hourlyWeather.join("");
     forecastCard.innerHTML = forecastWeather.join("");
@@ -79,4 +86,5 @@ const config = {
 
 navigator.geolocation.getCurrentPosition(success, error, config);
 
-//
+
+
