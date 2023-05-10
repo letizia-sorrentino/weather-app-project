@@ -47,7 +47,7 @@ const setWeather = (data, list) => {
         return `<div class="hourly-weather">
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <div class="weather-info> 
-        <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}</p>
+        <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
         <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
         <p class="description">${element.weather[0].description}</p>
         </div>
@@ -116,7 +116,7 @@ const updateHourlyCard = () => {
         return `<div class="hourly-weather">
     <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
     <div class="weather-info> 
-    <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString([])}</p>
+    <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
     <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
     <p class="description">${element.weather[0].description}</p>
     </div>
