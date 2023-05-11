@@ -6,13 +6,17 @@
     
 }
 
+body {
+    background-color: rgba(20,158,220,255);
+}
+
 .container {
     height: 100%;
     width: 100%;
+
 }
 
 .topnav {
-    background-color: rgba(20,158,220,255);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +36,6 @@ h1 {
     padding-bottom: 1.5rem;
     display: grid;
     justify-content: center;    
-    background-color: rgba(20,158,220,255);
 }
 
 input {
@@ -55,12 +58,6 @@ button {
     padding-left: 0.5rem;
 }
 
-
-main {
-    background-color: rgba(20,158,220,255);
-
-}
-
 h2 {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -71,6 +68,8 @@ h2 {
 .error-message {
     padding-bottom: 1rem;
     text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
     color:rgb(255, 255, 255);
 }
 
@@ -144,7 +143,6 @@ font-weight: 600;
 }
 
 footer {
-    background-color: rgba(20,158,220,255);
     color: rgb(255, 255, 255);
     text-align: center;
 }
