@@ -1,6 +1,5 @@
 //DOM elements
 const search = document.getElementById('search');
-const msg = document.querySelector('.form-message');
 const cityName = document.getElementById('city-name');
 const todayCard = document.getElementById('today-card');
 const hourlyCard = document.getElementById('hourly-card');
