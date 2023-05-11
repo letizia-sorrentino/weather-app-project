@@ -1,6 +1,5 @@
 //DOM elements
 const search = document.getElementById('search');
-const msg = document.querySelector('.form-message');
 const cityName = document.getElementById('city-name');
 const todayCard = document.getElementById('today-card');
 const hourlyCard = document.getElementById('hourly-card');
@@ -15,17 +14,23 @@ const success = async ({ coords }) => {
     const { latitude, longitude } = coords;
     console.log(latitude, longitude, coords);
 
-    //talk to the weather api
-    const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
-    apiData = data;
-    console.log(apiData);
-    console.log(apiData.city.name);
+//talk to the weather api
+    try {
+        const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+        apiData = data;
+        console.log(apiData);
+        console.log(apiData.city.name);
+        console.log(apiData.list[0].weather[0].main);
 
-    //get data and update the DOM 
-    updateLocation();
-    updateTodayCard();
-    updateHourlyCard();
-    updateForecastCard();
+        //get data and update the DOM 
+        updateLocation();
+        updateTodayCard();
+        updateHourlyCard();
+        updateForecastCard();
+        setBackgroundColor();
+    } catch (error) {
+        console.log('Api said NO!');
+    }
 
 };
 
@@ -48,7 +53,6 @@ const updateLocation = () => {
 
 const updateTodayCard = () => {
     const element = apiData.list[0];
-
     const todayWeather = `<div class="today-weather"> 
             <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
@@ -103,6 +107,47 @@ const updateForecastCard = () => {
     forecastCard.innerHTML = forecastWeather.join("");
 }
 
+
+//change background colour
+const setBackgroundColor = () => {
+    const weatherConditions = apiData.list[0].weather[0].main;
+    console.log(weatherConditions);
+
+    switch (weatherConditions) {
+        case 'Thunderstorm':
+            document.body.style.background = 'rgb(148,156,169)';
+            break;
+
+        case 'Drizzle':
+            document.body.style.background = 'rgb(148,156,169)';
+            break;
+
+        case 'Rain':
+            document.body.style.background = 'rgb(148,156,169)';
+            break;
+
+        case 'Snow':
+            document.body.style.background = 'rgb(242,242,242)';
+            break;
+
+        case 'Mist':
+            document.body.style.background = 'rgb(242,242,242)';
+            break;
+
+        case 'Clear':
+            document.body.style.background = 'rgba(20,158,220,255)';
+            break;
+
+        case 'Clouds':
+            document.body.style.background = 'rgb(148,156,169)';
+            break;
+
+        default:
+            document.body.style.background = 'rgba(20,158,220,255)';
+    }
+
+}
+
 const getData = async () => {
 
     try {
@@ -113,6 +158,7 @@ const getData = async () => {
         updateTodayCard();
         updateHourlyCard();
         updateForecastCard();
+        setBackgroundColor();
 
     } catch (error) {
         console.log('Api said NO!');
@@ -127,3 +173,5 @@ search.addEventListener('input', (e) => {
     console.log(searchValue);
     getData();
 });
+
+
