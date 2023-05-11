@@ -17,69 +17,21 @@ const success = async ({ coords }) => {
 
     //talk to the weather api
     const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
-    console.log(data);
-    console.log(data.city.name);
+    apiData = data;
+    console.log(apiData);
+    console.log(apiData.city.name);
 
-    //getLocation(data);
-    setWeather(data, data.list);
-}
+    //get data and update the DOM 
+    updateLocation();
+    updateTodayCard();
+    updateHourlyCard();
+    updateForecastCard();
 
-const setWeather = (data, list) => {
-    //Show City Name 
-    const location = `<div class="location"><h2>${data.city.name}</h2></div> `
-
-    //today-weather card
-    const todayData = list.slice(0, 1);
-    const todayWeather = todayData.map(element => {
-        return `<div class="today-weather"> 
-            <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-            <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-            <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
-            <p class="temp-min">L. ${Math.round(element.main.temp_min - 273.15)}&#8451</p>
-            <p class="description">${element.weather[0].description}</p>
-            </div>
-            </div > `
-    });
-
-    //hourly-weather card
-    const hourlyData = list.slice(1, 4);
-    const hourlyWeather = hourlyData.map(element => {
-        return `<div class="hourly-weather">
-        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-        <div class="weather-info> 
-        <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
-        <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-        <p class="description">${element.weather[0].description}</p>
-        </div>
-        </div > `
-    });
-
-    //daily Forecast Card
-    const forecastData = list.slice(4, 7);
-    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    const forecastWeather = forecastData.map(element => {
-        return `<div class="forecast-weather" >
-        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-        <div class="weather-info> 
-        <p class="day">${weekday[new Date(element.dt * 1000).getDay()]}</p>
-        <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-        <p class="description">${element.weather[0].description}</p>
-        </div >
-        </div > `
-    });
-
-    cityName.innerHTML = location;
-    todayCard.innerHTML = todayWeather.join("");
-    hourlyCard.innerHTML = hourlyWeather.join("");
-    forecastCard.innerHTML = forecastWeather.join("");
-
-}
+};
 
 const error = (error) => {
     console.log(error);
-    cityName.innerHTML = `<p class="error-message">Unable to retrieve your location</p>`
-
+    cityName.innerHTML = `<p class="error-message">Geolocation is not working, please add your location manually</p>`
 }
 
 const config = {
@@ -95,9 +47,9 @@ const updateLocation = () => {
 };
 
 const updateTodayCard = () => {
-    const todayData = apiData.list.slice(0, 1);
-    const todayWeather = todayData.map(element => {
-        return `<div class="today-weather"> 
+    const element = apiData.list[0];
+
+    const todayWeather = `<div class="today-weather"> 
             <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
             <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
@@ -105,8 +57,7 @@ const updateTodayCard = () => {
             <p class="description">${element.weather[0].description}</p>
             </div>
             </div > `
-    });
-    todayCard.innerHTML = todayWeather.join("");
+    todayCard.innerHTML = todayWeather;
 
 };
 
@@ -126,10 +77,19 @@ const updateHourlyCard = () => {
 };
 
 const updateForecastCard = () => {
-    const forecastData = apiData.list.slice(4, 7);
+    const forecastData = apiData.list.slice(4, apiData.list.length - 1);
+
+    console.log(forecastData);
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     const forecastWeather = forecastData.map(element => {
+
+        // console.log(new Date(element.dt * 1000).getHours()) 
+
+        if (new Date(element.dt * 1000).getHours() !== 19) {
+            return
+        }
+
         return `<div class="forecast-weather" >
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <div class="weather-info> 
@@ -139,8 +99,9 @@ const updateForecastCard = () => {
         </div >
         </div > `
     });
+
     forecastCard.innerHTML = forecastWeather.join("");
-} 
+}
 
 const getData = async () => {
 
@@ -159,7 +120,7 @@ const getData = async () => {
 }
 
 //User's input 
-search.addEventListener('input', e => {
+search.addEventListener('input', (e) => {
 
     //get the search value
     searchValue = e.target.value;
