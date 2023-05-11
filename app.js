@@ -14,23 +14,14 @@ const success = async ({ coords }) => {
     const { latitude, longitude } = coords;
     console.log(latitude, longitude, coords);
 
-//talk to the weather api
-    try {
-        const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
-        apiData = data;
-        console.log(apiData);
-        console.log(apiData.city.name);
-        console.log(apiData.list[0].weather[0].main);
+    //talk to the weather api
+    const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+    console.log(data);
+    console.log(data.city.name);
 
-        //get data and update the DOM 
-        updateLocation();
-        updateTodayCard();
-        updateHourlyCard();
-        updateForecastCard();
-        setBackgroundColor();
-    } catch (error) {
-        console.log('Api said NO!');
-    }
+    //getLocation(data);
+    setWeather(data, data.list);
+}
 
 };
 
@@ -52,8 +43,9 @@ const updateLocation = () => {
 };
 
 const updateTodayCard = () => {
-    const element = apiData.list[0];
-    const todayWeather = `<div class="today-weather"> 
+    const todayData = apiData.list.slice(0, 1);
+    const todayWeather = todayData.map(element => {
+        return `<div class="today-weather"> 
             <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
             <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
