@@ -1,13 +1,21 @@
 //DOM elements
 const search = document.getElementById('search');
+const spinner = document.getElementById('spinner');
+const errorMessage = document.getElementById('error-message');
 const cityName = document.getElementById('city-name');
-const todayCard = document.getElementById('today-card');
-const hourlyCard = document.getElementById('hourly-card');
-const forecastCard = document.getElementById('forecast-card');
+const today = document.getElementById('today');
+const hourly = document.getElementById('hourly');
+const forecast = document.getElementById('forecast');
 
 //Variables
 let searchValue;
 let apiData;
+
+const getSpinner = () => {
+    spinner.innerHTML = `<div class="spinner"> </div>`
+};
+getSpinner();
+
 
 //Async function working with Geolocation
 const success = async ({ coords }) => {
@@ -15,88 +23,108 @@ const success = async ({ coords }) => {
     console.log(latitude, longitude, coords);
 
     //talk to the weather api
-    const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
-    console.log(data);
-    console.log(data.city.name);
+    try {
+        const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+        apiData = data;
+        console.log(apiData);
+        console.log(apiData.city.name);
+        console.log(apiData.list[0].weather[0].main);
 
-    //getLocation(data);
-    setWeather(data, data.list);
-}
+        //get data and update the DOM 
+        removeSpinner();
+        updateLocation();
+        updateTodayCard();
+        updateHourlyCard();
+        updateForecastCard();
+        setBackgroundColor();
+
+    } catch (error) {
+        console.log('Api said NO!');
+    }
 
 };
 
 const error = (error) => {
     console.log(error);
-    cityName.innerHTML = `<p class="error-message">Geolocation is not working, please add your location manually</p>`
+    errorMessage.innerHTML = `<p class="error">Unable to retrieve your location, please refresh or add your location manually</p>`
 }
 
 const config = {
     enableHighAccuracy: true,
     maximumAge: 0,
-    timeout: 500
+    timeout: 1000
 }
 
 navigator.geolocation.getCurrentPosition(success, error, config);
+
+const removeSpinner = () => {
+    spinner.remove();
+    errorMessage.remove();
+}
 
 const updateLocation = () => {
     cityName.innerHTML = `<h2>${apiData.city.name}, ${apiData.city.country}</h2>`
 };
 
 const updateTodayCard = () => {
-    const todayData = apiData.list.slice(0, 1);
-    const todayWeather = todayData.map(element => {
-        return `<div class="today-weather"> 
+    const element = apiData.list[0];
+    const todayWeather = `<div class="today-card">  
             <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-            <div class="today-weather-info"><p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
+            <div class="today-weather-info">
+            <p class="today-temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
             <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
             <p class="temp-min">L. ${Math.round(element.main.temp_min - 273.15)}&#8451</p>
-            <p class="description">${element.weather[0].description}</p>
+            <p class="today-description">${element.weather[0].description}</p>
             </div>
-            </div > `
-    todayCard.innerHTML = todayWeather;
-
+            </div> `
+    today.innerHTML = todayWeather;
 };
 
 const updateHourlyCard = () => {
-    const hourlyData = apiData.list.slice(1, 4);
+    const hourlyData = apiData.list.slice(0, 5);
     const hourlyWeather = hourlyData.map(element => {
-        return `<div class="hourly-weather">
-    <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-    <div class="weather-info> 
-    <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
-    <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-    <p class="description">${element.weather[0].description}</p>
-    </div>
-    </div > `
+        return `<div class="weather-info"> 
+        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
+        <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
+        <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
+        <p class="description">${element.weather[0].description}</p>
+        </div>`
     });
-    hourlyCard.innerHTML = hourlyWeather.join("");
+
+    hourly.innerHTML = `<div class="hourly-card">
+    <h3 class="card-title">Hourly Forecast</h3>
+    <div class="weather-card">${hourlyWeather.join("")}</div>
+    </div>`
+
 };
 
 const updateForecastCard = () => {
     const forecastData = apiData.list.slice(4, apiData.list.length - 1);
-
     console.log(forecastData);
+
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const forecastWeather = forecastData.map(element => {
-
         // console.log(new Date(element.dt * 1000).getHours()) 
-
         if (new Date(element.dt * 1000).getHours() !== 19) {
             return
         }
 
-        return `<div class="forecast-weather" >
+        return `
+        <div class="weather-info"> 
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-        <div class="weather-info> 
         <p class="day">${weekday[new Date(element.dt * 1000).getDay()]}</p>
+        <p class="date">${new Date(element.dt * 1000).getDate()} ${month[new Date(element.dt * 1000).getMonth()]}</p>
         <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
         <p class="description">${element.weather[0].description}</p>
-        </div >
-        </div > `
+        </div>`
     });
 
-    forecastCard.innerHTML = forecastWeather.join("");
+    forecast.innerHTML = `<div class="forecast-card">
+    <h3 class="card-title">Daily Forecast</h3>
+    <div class="weather-card">${forecastWeather.join("")}</div>
+    </div>`
 }
 
 
@@ -146,6 +174,7 @@ const getData = async () => {
         const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
         apiData = data;
         console.log(apiData);
+        removeSpinner();
         updateLocation();
         updateTodayCard();
         updateHourlyCard();
@@ -154,6 +183,7 @@ const getData = async () => {
 
     } catch (error) {
         console.log('Api said NO!');
+        errorMessage.innerHTML = `<p class="error">Unable to retrieve your location</p>`
     }
 }
 
