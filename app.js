@@ -63,18 +63,17 @@ const removeSpinner = () => {
 }
 
 const updateLocation = () => {
-    cityName.innerHTML = `<h2>${apiData.city.name}, ${apiData.city.country}</h2>`
+    cityName.innerHTML = `<p class="location">${apiData.city.name}, ${apiData.city.country}</p>`
 };
 
 const updateTodayCard = () => {
     const element = apiData.list[0];
     const todayWeather = `<div class="today-card">  
-            <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <div class="today-weather-info">
             <p class="today-temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-            <p class="temp-max">H. ${Math.round(element.main.temp_max - 273.15)}&#8451</p>
-            <p class="temp-min">L. ${Math.round(element.main.temp_min - 273.15)}&#8451</p>
+            <div class="today-weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
             <p class="today-description">${element.weather[0].description}</p>
+            <p class="temp-max-min">H:${Math.round(element.main.temp_max - 273.15)}&#176;  L:${Math.round(element.main.temp_min - 273.15)}&#176;</p>
             </div>
             </div> `
     today.innerHTML = todayWeather;
@@ -84,10 +83,9 @@ const updateHourlyCard = () => {
     const hourlyData = apiData.list.slice(0, 5);
     const hourlyWeather = hourlyData.map(element => {
         return `<div class="weather-info"> 
-        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
+        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-        <p class="description">${element.weather[0].description}</p>
         </div>`
     });
 
@@ -102,7 +100,7 @@ const updateForecastCard = () => {
     const forecastData = apiData.list.slice(4, apiData.list.length - 1);
     console.log(forecastData);
 
-    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const forecastWeather = forecastData.map(element => {
@@ -113,11 +111,10 @@ const updateForecastCard = () => {
 
         return `
         <div class="weather-info"> 
-        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <p class="day">${weekday[new Date(element.dt * 1000).getDay()]}</p>
         <p class="date">${new Date(element.dt * 1000).getDate()} ${month[new Date(element.dt * 1000).getMonth()]}</p>
+        <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
-        <p class="description">${element.weather[0].description}</p>
         </div>`
     });
 
@@ -135,35 +132,36 @@ const setBackgroundColor = () => {
 
     switch (weatherConditions) {
         case 'Thunderstorm':
-            document.body.style.background = 'rgb(148,156,169)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
+
             break;
 
         case 'Drizzle':
-            document.body.style.background = 'rgb(148,156,169)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
             break;
 
         case 'Rain':
-            document.body.style.background = 'rgb(148,156,169)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
             break;
 
         case 'Snow':
-            document.body.style.background = 'rgb(242,242,242)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
             break;
 
         case 'Mist':
-            document.body.style.background = 'rgb(242,242,242)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
             break;
 
         case 'Clear':
-            document.body.style.background = 'rgba(20,158,220,255)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(148,187,233,1) 51%, rgba(20,158,220,1) 100%)';
             break;
 
         case 'Clouds':
-            document.body.style.background = 'rgb(148,156,169)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
             break;
 
         default:
-            document.body.style.background = 'rgba(20,158,220,255)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(148,187,233,1) 51%, rgba(20,158,220,1) 100%)';
     }
 
 }

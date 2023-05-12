@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="module" src="/weather-app-project/app.js"></script>
+    <script type="module" src="/app.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/x-icon" href="/resources/favicon.png" />
 
@@ -22,7 +22,7 @@
         <!-- Find my location-->
         <div class="search-form">
           <form id="form" name="form">
-            <label for="search">Add Location:</label>
+            <label for="search"></label>
             <input
               id="search"
               name="search"
@@ -52,12 +52,11 @@
       </header>
       <main>
         <div id="spinner"></div>
-          <div id="error-message"></div>
-          <div id="city-name"></div>
-          <div id="today"></div>
-          <div id="hourly"></div>
-          <div id="forecast"></div>
-    
+        <div id="error-message"></div>
+        <div id="city-name"></div>
+        <div id="today"></div>
+        <div id="hourly"></div>
+        <div id="forecast"></div>
       </main>
     </div>
     <footer>
