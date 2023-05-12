@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-
+    color: rgb(255, 255, 255);
 }
 
 body {
@@ -27,15 +27,25 @@ h1 {
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
-    color: white;
 }
 
 /* Find my location  */
 .search-form {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    display: grid;
+    display: flex;
+    text-align: center;
     justify-content: center;
+}
+
+
+label {
+    color: rgb(255, 255, 255);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 input {
@@ -47,10 +57,6 @@ input {
     position: relative;
 }
 
-label {
-    color: rgb(255, 255, 255)
-}
-
 button {
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -58,14 +64,34 @@ button {
     padding-left: 0.5rem;
 }
 
-h2 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+/* spinner */
+
+.spinner {
+    border: 1rem solid rgb(243, 243, 243);
+    border-top: 1rem solid rgba(20, 158, 220, 255);
+    border-radius: 50%;
+    width: 7.5rem;
+    height: 7.5rem;
+    animation: spin 2s linear infinite;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    color: rgb(255, 255, 255);
 }
 
-.error-message {
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* error message */
+.error {
     padding-bottom: 1rem;
     text-align: center;
     padding-left: 4rem;
@@ -73,49 +99,64 @@ h2 {
     color: rgb(255, 255, 255);
 }
 
+
+/* Location */
+h2 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
 /* Today's Weather  */
-#today-card {
-    background-color: rgb(255, 255, 255, 0.5);
+.today-card {
+    background-color: rgb(255, 255, 255, 0.3);
     border-top: rgb(252, 201, 14) solid 0.75rem;
     border-radius: 0.5rem;
-    padding: 0.25rem 0.75rem 1.25rem 1.5rem;
     margin-left: auto;
     margin-right: auto;
-    height: 20vh;
-    width: 90%;
+    margin-bottom: 2rem;
+    height: 40vh;
+    min-height: 40vh;
+    width: 80%;
+    text-align: center;
 }
 
-.today-weather {
-    display: flex;
-    column-gap: 1rem;
-    align-items: center;
-}
-
-
-.today-weather .temp {
-    font-size: 2rem;
+.today-temp {
+    font-size: 3.5rem;
     font-weight: 600;
 }
 
 /* Hourly Weather  */
-
-#hourly-card {
-    background-color: rgb(255, 255, 255, 0.5);
+.hourly-card {
+    background-color: rgb(255, 255, 255, 0.3);
     border-top: rgba(251, 163, 27, 255) solid 0.75rem;
     border-radius: 0.5rem;
-    padding: 0.25rem 0.75rem 1.25rem 1.5rem;
+    padding: 0.25rem 1rem 1.25rem 1rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2rem;
     height: 40vh;
-    width: 90%;
-    display: flex;
-    justify-content: center;
+    min-height: 40vh;
+    width: 80%;
+
+}
+
+.card-title {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     text-align: center;
-    column-gap: 1rem;
+    color: rgb(255, 255, 255);
+}
+
+.weather-card {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    column-gap: 0.75rem;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-
 }
 
 .temp {
@@ -123,25 +164,63 @@ h2 {
     font-weight: 600;
 }
 
+.description {
+    font-size: 1rem;
+
+}
+
 /* DailyForecast  */
-#forecast-card {
-    background-color: rgb(255, 255, 255, 0.5);
+.forecast-card {
+    background-color: rgb(255, 255, 255, 0.3);
     border-top: rgba(242, 106, 48, 255) solid 0.75rem;
     border-radius: 0.5rem;
-    padding: 0.25rem 0.75rem 1.25rem 1.5rem;
+    padding: 0.25rem 1rem 1.25rem 1rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2rem;
     height: 40vh;
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    column-gap: 1rem;
-    overflow: auto;
-    white-space: nowrap;
+    width: 80%;
+
 }
 
 footer {
     color: rgb(255, 255, 255);
     text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+
+    .today-card,
+    .hourly-card,
+    .forecast-card {
+        height: 50vh;
+    }
+
+    .today-weather-info {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.75rem;
+        font-size: 1.25rem;
+    }
+
+    .weather-info {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.75rem;
+    }
+
+    .weather-info .day {
+        font-weight: 600;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+
+    .weather-card {
+        justify-content: center;
+        column-gap: 3rem;
+    }
 }
