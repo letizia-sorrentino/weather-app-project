@@ -46,7 +46,7 @@ const success = async ({ coords }) => {
 
 const error = (error) => {
     console.log(error);
-    errorMessage.innerHTML = `<p class="error">Unable to retrieve your location, please refresh or add your location manually</p>`
+    errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please refresh the page or add your location manually.</p>`
 }
 
 const config = {
@@ -85,7 +85,7 @@ const updateHourlyCard = () => {
         return `<div class="weather-info"> 
         <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-        <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
+        <p class="temp">${Math.round(element.main.temp - 273.15)}&#176;</p>
         </div>`
     });
 
@@ -114,7 +114,7 @@ const updateForecastCard = () => {
         <p class="day">${weekday[new Date(element.dt * 1000).getDay()]}</p>
         <p class="date">${new Date(element.dt * 1000).getDate()} ${month[new Date(element.dt * 1000).getMonth()]}</p>
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
-        <p class="temp">${Math.round(element.main.temp - 273.15)}&#8451</p>
+        <p class="temp">${Math.round(element.main.temp - 273.15)}&#176;</p>
         </div>`
     });
 
@@ -157,7 +157,7 @@ const setBackgroundColor = () => {
             break;
 
         case 'Clouds':
-            document.body.style.background = 'linear-gradient(180deg, rgba(211,223,242,1) 0%, rgba(113,113,140,1) 100%)';
+            document.body.style.background = 'linear-gradient(180deg, rgba(148,187,233,1) 0%, rgba(113,113,140,1)  100%)';
             break;
 
         default:
@@ -192,6 +192,13 @@ search.addEventListener('input', (e) => {
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
+});
+
+btn.addEventListener('submit', (e) => {
+    searchValue = e.target.value;
+    console.log(searchValue);
+    getData();
+
 });
 
 
