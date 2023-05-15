@@ -209,11 +209,12 @@ search.addEventListener("keypress", function(e) {
   });
 
 
-btn.addEventListener('submit', (e) => {
+btn.addEventListener('click', (e) => {
     e.preventDefault()
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
+    document.getElementById("form").reset();
 
 });
 
