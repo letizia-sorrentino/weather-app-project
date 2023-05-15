@@ -55,7 +55,7 @@ const error = (error) => {
 const config = {
     enableHighAccuracy: true,
     maximumAge: 0,
-    timeout: 1000
+    timeout: 2000
 }
 
 navigator.geolocation.getCurrentPosition(success, error, config);
