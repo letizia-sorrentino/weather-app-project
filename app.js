@@ -1,5 +1,6 @@
 //DOM elements
 const search = document.getElementById('search');
+const btn = document.getElementById('btn');
 const spinner = document.getElementById('spinner');
 const errorMessage = document.getElementById('error-message');
 const cityName = document.getElementById('city-name');
@@ -188,6 +189,7 @@ const getData = async () => {
 
 //User's input 
 search.addEventListener('input', (e) => {
+    e.preventDefault()
 
     //get the search value
     searchValue = e.target.value;
@@ -196,6 +198,7 @@ search.addEventListener('input', (e) => {
 });
 
 btn.addEventListener('submit', (e) => {
+    e.preventDefault()
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
