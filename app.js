@@ -190,19 +190,35 @@ const getData = async () => {
 //User's input 
 search.addEventListener('input', (e) => {
     e.preventDefault()
-
     //get the search value
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
+    document.getElementById("form").reset();
+
 });
+
+search.addEventListener("keypress", function(e) {
+    // If the user presses the "Enter" key on the keyboard
+    if (e.key === "Enter") {
+      e.preventDefault();
+    searchValue = e.target.value;
+    console.log(searchValue);
+    getData();
+    document.getElementById("form").reset();
+    }
+  });
+
 
 btn.addEventListener('submit', (e) => {
     e.preventDefault()
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
+    document.getElementById("form").reset();
+
 
 });
+
 
 
