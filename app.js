@@ -1,6 +1,7 @@
 //DOM elements
 const search = document.getElementById('search');
 const btn = document.getElementById('btn');
+const form = document.getElementById('form');
 const spinner = document.getElementById('spinner');
 const errorMessage = document.getElementById('error-message');
 const cityName = document.getElementById('city-name');
@@ -197,16 +198,16 @@ search.addEventListener('input', (e) => {
 
 });
 
-search.addEventListener("keypress", function(e) {
+search.addEventListener("keypress", function (e) {
     // If the user presses the "Enter" key on the keyboard
     if (e.key === "Enter") {
-      e.preventDefault();
-    searchValue = e.target.value;
-    console.log(searchValue);
-    getData();
-    document.getElementById("form").reset();
+        e.preventDefault();
+        searchValue = e.target.value;
+        console.log(searchValue);
+        getData();
+        form.reset();
     }
-  });
+});
 
 
 btn.addEventListener('click', (e) => {
@@ -214,7 +215,7 @@ btn.addEventListener('click', (e) => {
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
-    document.getElementById("form").reset();
+    form.reset();
 
 });
 
