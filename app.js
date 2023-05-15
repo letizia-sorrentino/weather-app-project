@@ -194,7 +194,6 @@ search.addEventListener('input', (e) => {
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
-    document.getElementById("form").reset();
 
 });
 
@@ -215,8 +214,6 @@ btn.addEventListener('submit', (e) => {
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
-    document.getElementById("form").reset();
-
 
 });
 
