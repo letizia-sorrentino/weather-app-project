@@ -46,7 +46,7 @@ input {
     width: 12rem;
     border-radius: 0.5rem;
     position: relative;
-    color:rgb(2, 0, 36);
+    color: rgb(2, 0, 36);
 }
 
 button {
@@ -142,7 +142,6 @@ button {
 
 ::-webkit-scrollbar {
     color: rgba(0, 0, 0, 0);
-    ;
 }
 
 .card-title {
