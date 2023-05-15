@@ -2,12 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: rgb(255, 255, 255);
 }
 
 body {
-    background-color: rgba(20, 158, 220, 255);
+    background: rgb(2, 0, 36);
+    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
 
 .container {
@@ -38,22 +39,12 @@ h1 {
     justify-content: center;
 }
 
-
-label {
-    color: rgb(255, 255, 255);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-}
-
 input {
     border: none;
-    background-color: rgb(233, 236, 241);
+    background-color: rgb(255, 255, 255, 0.8);
     height: 2rem;
     width: 12rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     position: relative;
 }
 
@@ -65,7 +56,6 @@ button {
 }
 
 /* spinner */
-
 .spinner {
     border: 1rem solid rgb(243, 243, 243);
     border-top: 1rem solid rgba(20, 158, 220, 255);
@@ -101,45 +91,57 @@ button {
 
 
 /* Location */
-h2 {
+.location {
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     text-align: center;
     color: rgb(255, 255, 255);
+    font-size: 2.5rem;
 }
 
 /* Today's Weather  */
+
 .today-card {
-    background-color: rgb(255, 255, 255, 0.3);
-    border-top: rgb(252, 201, 14) solid 0.75rem;
-    border-radius: 0.5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2rem;
-    height: 40vh;
-    min-height: 40vh;
-    width: 80%;
+    height: 45vh;
+    min-height: 45vh;
+    width: 90%;
     text-align: center;
 }
 
 .today-temp {
-    font-size: 3.5rem;
-    font-weight: 600;
+    font-size: 4rem;
+    font-weight: 100;
+}
+
+.today-weather-icon img {
+    height: 8rem;
+    width: auto;
+}
+
+.today-description,
+.temp-max-min {
+    font-size: 1.5rem;
 }
 
 /* Hourly Weather  */
 .hourly-card {
     background-color: rgb(255, 255, 255, 0.3);
-    border-top: rgba(251, 163, 27, 255) solid 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     padding: 0.25rem 1rem 1.25rem 1rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2rem;
-    height: 40vh;
-    min-height: 40vh;
-    width: 80%;
+    height: 35vh;
+    min-height: 35vh;
+    width: 90%;
+}
 
+::-webkit-scrollbar {
+    color: rgba(0, 0, 0, 0);
+    ;
 }
 
 .card-title {
@@ -149,14 +151,18 @@ h2 {
     color: rgb(255, 255, 255);
 }
 
-.weather-card {
+.hourly-card .weather-card {
     display: flex;
     text-align: center;
-    align-items: center;
     column-gap: 0.75rem;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+}
+
+.weather-icon img {
+    height: 4rem;
+    width: auto;
 }
 
 .temp {
@@ -164,23 +170,33 @@ h2 {
     font-weight: 600;
 }
 
-.description {
-    font-size: 1rem;
-
-}
-
 /* DailyForecast  */
 .forecast-card {
     background-color: rgb(255, 255, 255, 0.3);
-    border-top: rgba(242, 106, 48, 255) solid 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     padding: 0.25rem 1rem 1.25rem 1rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2rem;
-    height: 40vh;
-    width: 80%;
+    height: 55vh;
+    min-height: 55vh;
+    width: 90%;
+}
 
+.forecast-card .weather-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 0.75rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    white-space: nowrap;
+}
+
+.day,
+.date {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 footer {
@@ -192,35 +208,8 @@ footer {
 
 @media screen and (min-width: 600px) {
 
-    .today-card,
-    .hourly-card,
-    .forecast-card {
-        height: 50vh;
+    .hourly-card .weather-card {
+        justify-content: space-between;
     }
 
-    .today-weather-info {
-        display: flex;
-        flex-direction: column;
-        row-gap: 0.75rem;
-        font-size: 1.25rem;
-    }
-
-    .weather-info {
-        display: flex;
-        flex-direction: column;
-        row-gap: 0.75rem;
-    }
-
-    .weather-info .day {
-        font-weight: 600;
-    }
-
-}
-
-@media screen and (min-width: 800px) {
-
-    .weather-card {
-        justify-content: center;
-        column-gap: 3rem;
-    }
 }
