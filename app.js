@@ -104,7 +104,7 @@ const updateForecastCard = () => {
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const forecastWeather = forecastData.map(element => {
-        // console.log(new Date(element.dt * 1000).getHours()) 
+        console.log(new Date(element.dt * 1000).getHours())
         if (new Date(element.dt * 1000).getHours() !== 19) {
             return
         }
