@@ -24,7 +24,8 @@ const success = async ({ coords }) => {
 
     //talk to the weather api
     try {
-        const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+
         apiData = data;
         console.log(apiData);
         console.log(apiData.city.name);
@@ -169,7 +170,7 @@ const setBackgroundColor = () => {
 const getData = async () => {
 
     try {
-        const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
         apiData = data;
         console.log(apiData);
         removeSpinner();
