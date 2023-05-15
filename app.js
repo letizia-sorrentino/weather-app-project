@@ -1,6 +1,5 @@
 //DOM elements
 const search = document.getElementById('search');
-const btn = document.getElementById('btn');
 const form = document.getElementById('form');
 const spinner = document.getElementById('spinner');
 const errorMessage = document.getElementById('error-message');
@@ -85,7 +84,7 @@ const updateTodayCard = () => {
 const updateHourlyCard = () => {
     const hourlyData = apiData.list.slice(0, 5);
     const hourlyWeather = hourlyData.map(element => {
-        return `<div class="weather-info"> 
+        return `<div class="hourly-weather-info"> 
         <p class="hours">${new Date(element.dt * 1000).getHours().toLocaleString()}:00</p>
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
         <p class="temp">${Math.round(element.main.temp - 273.15)}&#176;</p>
@@ -94,7 +93,7 @@ const updateHourlyCard = () => {
 
     hourly.innerHTML = `<div class="hourly-card">
     <h3 class="card-title">Hourly Forecast</h3>
-    <div class="weather-card">${hourlyWeather.join("")}</div>
+    <div class="hourly-weather-card">${hourlyWeather.join("")}</div>
     </div>`
 
 };
@@ -107,13 +106,13 @@ const updateForecastCard = () => {
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const forecastWeather = forecastData.map(element => {
-        console.log(new Date(element.dt * 1000).getHours())
+        //console.log(new Date(element.dt * 1000).getHours())
         if (new Date(element.dt * 1000).getHours() !== 19) {
             return
         }
 
         return `
-        <div class="weather-info"> 
+        <div class="forecast-weather-info"> 
         <p class="day">${weekday[new Date(element.dt * 1000).getDay()]}</p>
         <p class="date">${new Date(element.dt * 1000).getDate()} ${month[new Date(element.dt * 1000).getMonth()]}</p>
         <div class="weather-icon"><img src="https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png"></div>
@@ -123,7 +122,7 @@ const updateForecastCard = () => {
 
     forecast.innerHTML = `<div class="forecast-card">
     <h3 class="card-title">Daily Forecast</h3>
-    <div class="weather-card">${forecastWeather.join("")}</div>
+    <div class="forecast-weather-card">${forecastWeather.join("")}</div>
     </div>`
 }
 
@@ -209,15 +208,6 @@ search.addEventListener("keypress", function (e) {
     }
 });
 
-
-btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    searchValue = e.target.value;
-    console.log(searchValue);
-    getData();
-    form.reset();
-
-});
 
 
 

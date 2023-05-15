@@ -101,7 +101,6 @@ button {
 }
 
 /* Today's Weather  */
-
 .today-card {
     margin-left: auto;
     margin-right: auto;
@@ -140,10 +139,6 @@ button {
     width: 90%;
 }
 
-::-webkit-scrollbar {
-    color: rgba(0, 0, 0, 0);
-}
-
 .card-title {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -151,13 +146,19 @@ button {
     color: rgb(255, 255, 255);
 }
 
-.hourly-card .weather-card {
+.hourly-weather-card {
     display: flex;
     text-align: center;
     column-gap: 0.75rem;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hourly-weather-card::-webkit-scrollbar {
+    display: none;
 }
 
 .weather-icon img {
@@ -183,7 +184,7 @@ button {
     width: 90%;
 }
 
-.forecast-card .weather-info {
+.forecast-weather-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -206,9 +207,9 @@ footer {
     padding-bottom: 1rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
 
-    .hourly-card .weather-card {
+    .hourly-weather-card {
         justify-content: space-between;
     }
 
