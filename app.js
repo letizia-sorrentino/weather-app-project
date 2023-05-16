@@ -12,11 +12,11 @@ const forecast = document.getElementById('forecast');
 let searchValue;
 let apiData;
 
+//Insert spinner
 const getSpinner = () => {
     spinner.innerHTML = `<div class="spinner"> </div>`
 };
 getSpinner();
-
 
 //Async function working with Geolocation
 const success = async ({ coords }) => {
@@ -43,18 +43,18 @@ const success = async ({ coords }) => {
     } catch (error) {
         if (searchValue === '') {
             console.log('Empty form');
-            return errorMessage.innerHTML = `<p class="error">Please enter your location</p>`
+            errorMessage.innerHTML = `<p class="error">Please enter your location.</p>`;
+
         } else {
-            console.log('API said no!')
-            return errorMessage.innerHTML = `<p class="error">Unable to retrieve your location.</p>`
+            console.log('API said no!');
+            errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please try again.</p>`;
         }
     }
 };
 
 const error = (error) => {
     console.log(error);
-    errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please refresh the page or add your location manually.</p>`
-
+    errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please refresh the page or add your location manually.</p>`;
 }
 
 const config = {
@@ -65,6 +65,7 @@ const config = {
 
 navigator.geolocation.getCurrentPosition(success, error, config);
 
+//Update the page and remove spinner
 const removeSpinner = () => {
     spinner.remove();
     errorMessage.remove();
@@ -132,8 +133,7 @@ const updateForecastCard = () => {
     </div>`
 }
 
-
-//change background colour
+//Change background colour
 const setBackgroundColor = () => {
     const weatherConditions = apiData.list[0].weather[0].main;
     console.log(weatherConditions);
@@ -190,10 +190,11 @@ const getData = async () => {
     } catch (error) {
         if (searchValue === '') {
             console.log('Empty form');
-            return errorMessage.innerHTML = `<p class="error">Please enter your location</p>`
+            errorMessage.innerHTML = `<p class="error">Please enter your location.</p>`;
         } else {
-            console.log('API said no!')
-            return errorMessage.innerHTML = `<p class="error">Unable to retrieve your location</p>`
+            console.log('API said no!');
+            errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please try again.</p>`;
+
         }
     }
 }
