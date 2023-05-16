@@ -24,32 +24,22 @@ const success = async ({ coords }) => {
     console.log(latitude, longitude, coords);
 
     //talk to the weather api
-    try {
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
 
-        apiData = data;
-        console.log(apiData);
-        console.log(apiData.city.name);
-        console.log(apiData.list[0].weather[0].main);
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
 
-        //get data and update the DOM 
-        removeSpinner();
-        updateLocation();
-        updateTodayCard();
-        updateHourlyCard();
-        updateForecastCard();
-        setBackgroundColor();
+    apiData = data;
+    console.log(apiData);
+    console.log(apiData.city.name);
+    console.log(apiData.list[0].weather[0].main);
 
-    } catch (error) {
-        if (searchValue === '') {
-            console.log('Empty form');
-            errorMessage.innerHTML = `<p class="error">Please enter your location.</p>`;
+    //get data and update the DOM 
+    removeSpinner();
+    updateLocation();
+    updateTodayCard();
+    updateHourlyCard();
+    updateForecastCard();
+    setBackgroundColor();
 
-        } else {
-            console.log('API said no!');
-            errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please try again.</p>`;
-        }
-    }
 };
 
 const error = (error) => {
@@ -191,6 +181,7 @@ const getData = async () => {
         if (searchValue === '') {
             console.log('Empty form');
             errorMessage.innerHTML = `<p class="error">Please enter your location.</p>`;
+
         } else {
             console.log('API said no!');
             errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please try again.</p>`;
