@@ -192,6 +192,13 @@ button {
     overflow-x: hidden;
     overflow-y: scroll;
     white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+.forecast-weather-info::-webkit-scrollbar {
+    display: none;
 }
 
 .day,
