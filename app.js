@@ -181,11 +181,20 @@ const getData = async () => {
         if (searchValue === '') {
             console.log('Empty form');
             errorMessage.innerHTML = `<p class="error">Please enter your location.</p>`;
+            document.body.style.background = 'radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';
+            cityName.innerHTML = ``;
+            today.innerHTML = ``;
+            hourly.innerHTML = ``;
+            forecast.innerHTML = ``;
 
         } else {
             console.log('API said no!');
             errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please try again.</p>`;
-
+            document.body.style.background = 'radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';
+            cityName.innerHTML = ``;
+            today.innerHTML = ``;
+            hourly.innerHTML = ``;
+            forecast.innerHTML = ``;
         }
     }
 }

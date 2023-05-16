@@ -82,6 +82,11 @@ button {
 }
 
 /* error message */
+.error-message {
+    height: 10vh;
+
+}
+
 .error {
     padding-bottom: 1rem;
     text-align: center;
