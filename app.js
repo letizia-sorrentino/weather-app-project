@@ -41,14 +41,20 @@ const success = async ({ coords }) => {
         setBackgroundColor();
 
     } catch (error) {
-        console.log('Api said NO!');
+        if (searchValue === '') {
+            console.log('Empty form');
+            return errorMessage.innerHTML = `<p class="error">Please enter your location</p>`
+        } else {
+            console.log('API said no!')
+            return errorMessage.innerHTML = `<p class="error">Unable to retrieve your location.</p>`
+        }
     }
-
 };
 
 const error = (error) => {
     console.log(error);
     errorMessage.innerHTML = `<p class="error">Unable to retrieve your location. Please refresh the page or add your location manually.</p>`
+
 }
 
 const config = {
@@ -182,8 +188,13 @@ const getData = async () => {
         setBackgroundColor();
 
     } catch (error) {
-        console.log('Api said NO!');
-        errorMessage.innerHTML = `<p class="error">Unable to retrieve your location</p>`
+        if (searchValue === '') {
+            console.log('Empty form');
+            return errorMessage.innerHTML = `<p class="error">Please enter your location</p>`
+        } else {
+            console.log('API said no!')
+            return errorMessage.innerHTML = `<p class="error">Unable to retrieve your location</p>`
+        }
     }
 }
 
@@ -203,7 +214,7 @@ search.addEventListener("keydown", (e) => {
         getData();
         form.reset();
     }
-    
+
 });
 
 
