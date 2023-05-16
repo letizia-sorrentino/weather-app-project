@@ -58,7 +58,7 @@ navigator.geolocation.getCurrentPosition(success, error, config);
 //Update the page and remove spinner
 const removeSpinner = () => {
     spinner.remove();
-    errorMessage.remove();
+    errorMessage.innerHTML = ``;
 }
 
 const updateLocation = () => {
