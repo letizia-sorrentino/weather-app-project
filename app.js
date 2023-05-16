@@ -96,7 +96,7 @@ const updateHourlyCard = () => {
     <div class="hourly-weather-card">${hourlyWeather.join("")}</div>
     </div>`
 
-};
+}
 
 const updateForecastCard = () => {
     const forecastData = apiData.list.slice(4, apiData.list.length - 1);
@@ -190,22 +190,20 @@ const getData = async () => {
 //User's input 
 search.addEventListener('input', (e) => {
     e.preventDefault()
-    //get the search value
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
+    form.reset();
 
 });
 
-search.addEventListener("keypress", function (e) {
-    // If the user presses the "Enter" key on the keyboard
-    if (e.key === "Enter") {
+search.addEventListener("keydown", (e) => {
         e.preventDefault();
         searchValue = e.target.value;
         console.log(searchValue);
         getData();
         form.reset();
-    }
+ 
 });
 
 
