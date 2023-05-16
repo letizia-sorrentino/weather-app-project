@@ -193,17 +193,17 @@ search.addEventListener('input', (e) => {
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
-    form.reset();
-
 });
 
 search.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
         e.preventDefault();
         searchValue = e.target.value;
         console.log(searchValue);
         getData();
         form.reset();
- 
+    }
+    
 });
 
 
