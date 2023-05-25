@@ -1,3 +1,6 @@
+//API Key
+import { APIKey } from "./config.js";
+
 //DOM elements
 const search = document.getElementById('search');
 const form = document.getElementById('form');
@@ -25,7 +28,7 @@ const success = async ({ coords }) => {
 
     //talk to the weather api
 
-    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+    const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${APIKey}`);
 
     apiData = data;
     console.log(apiData);
@@ -167,7 +170,7 @@ const setBackgroundColor = () => {
 const getData = async () => {
 
     try {
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=7191fefc1ad22b3e9a87628b612c82a9`);
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=${APIKey}`);
         apiData = data;
         console.log(apiData);
         removeSpinner();
