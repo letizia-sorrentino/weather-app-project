@@ -211,13 +211,13 @@ search.addEventListener('submit', (e) => {
     getData();
 });
 
-// btn.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     searchValue = e.target.value;
-//     console.log(searchValue);
-//     getData(searchValue);
+btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchValue = search.value;
+    console.log(searchValue);
+    getData(searchValue);
   
-// });
+});
 
 search.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
