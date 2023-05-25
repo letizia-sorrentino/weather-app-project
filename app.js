@@ -4,6 +4,7 @@ import { APIKey } from "./config.js";
 //DOM elements
 const search = document.getElementById('search');
 const form = document.getElementById('form');
+const btn = document.getElementById('btn');
 const spinner = document.getElementById('spinner');
 const errorMessage = document.getElementById('error-message');
 const cityName = document.getElementById('city-name');
@@ -203,12 +204,20 @@ const getData = async () => {
 }
 
 //User's input 
-search.addEventListener('input', (e) => {
+search.addEventListener('submit', (e) => {
     e.preventDefault()
     searchValue = e.target.value;
     console.log(searchValue);
     getData();
 });
+
+// btn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     searchValue = e.target.value;
+//     console.log(searchValue);
+//     getData(searchValue);
+  
+// });
 
 search.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -217,7 +226,7 @@ search.addEventListener("keydown", (e) => {
         console.log(searchValue);
         getData();
         form.reset();
-    }
+    };
 
 });
 
